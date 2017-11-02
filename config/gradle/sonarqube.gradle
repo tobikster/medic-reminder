@@ -1,0 +1,10 @@
+apply plugin: 'org.sonarqube'
+
+sonarqube {
+    properties {
+        property 'sonar.host.url', 'http://192.168.0.133:9000'
+        property 'sonar.projectKey', 'com.tobikster.medicreminder'
+        property 'sonar.projectName', 'Medic Reminder'
+        property 'sonar.projectVersion', '0.0'
+    }
+}
