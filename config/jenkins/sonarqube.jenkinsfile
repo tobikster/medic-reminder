@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clean') {
+            steps {
+                sh 'chmod +x gradlew && ./gradlew clean'
+            }
+        }
+
+        stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    // requires SonarQube Scanner for Gradle 2.1+
+                    // It's important to add --info because of SONARJNKNS-281
+                    sh "./gradlew --info -Dsonar.branch=$GIT_BRANCH sonarqube"
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    script {
+                        def qualityGate = waitForQualityGate()
+                        if (qualityGate.status != 'OK') {
+                            error "Pipeline aborted due to quality gate failure: ${qualityGate.status}"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
