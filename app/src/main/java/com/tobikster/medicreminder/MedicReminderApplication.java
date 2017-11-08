@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.squareup.leakcanary.LeakCanary;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import timber.log.Timber;
 
 public class MedicReminderApplication extends Application {
@@ -16,8 +18,9 @@ public class MedicReminderApplication extends Application {
 			// You should not init your app in this process.
 			return;
 		}
-
 		LeakCanary.install(this);
+
+		JodaTimeAndroid.init(this);
 
 		if (BuildConfig.DEBUG) {
 			Timber.plant(new Timber.DebugTree());
