@@ -7,7 +7,6 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 @Database(entities = {Reminder.class}, version = 1)
-@TypeConverters(value = DateTimeConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 	private static volatile AppDatabase instance;
 

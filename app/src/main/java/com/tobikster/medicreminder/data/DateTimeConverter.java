@@ -4,7 +4,8 @@ import android.arch.persistence.room.TypeConverter;
 
 import org.joda.time.LocalTime;
 
-public class DateTimeConverter {
+@SuppressWarnings("WeakerAccess")
+class DateTimeConverter {
 	private DateTimeConverter() {}
 
 	@TypeConverter
