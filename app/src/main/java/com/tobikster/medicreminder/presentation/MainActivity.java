@@ -11,5 +11,8 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		RemindersListFragment remindersListFragment = RemindersListFragment.newInstance();
+		getSupportFragmentManager().beginTransaction().replace(R.id.content, remindersListFragment).commit();
 	}
 }

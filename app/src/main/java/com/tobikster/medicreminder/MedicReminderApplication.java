@@ -18,12 +18,12 @@ public class MedicReminderApplication extends Application {
 			// You should not init your app in this process.
 			return;
 		}
-		LeakCanary.install(this);
-
-		JodaTimeAndroid.init(this);
-
 		if (BuildConfig.DEBUG) {
 			Timber.plant(new Timber.DebugTree());
 		}
+
+		LeakCanary.install(this);
+
+		JodaTimeAndroid.init(this);
 	}
 }
