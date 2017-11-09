@@ -1,4 +1,4 @@
-package com.tobikster.medicreminder.presentation;
+package com.tobikster.medicreminder.ui;
 
 
 import android.arch.lifecycle.ViewModelProviders;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.tobikster.medicreminder.R;
 import com.tobikster.medicreminder.data.Reminder;
-import com.tobikster.medicreminder.presentation.model.RemindersListModel;
+import com.tobikster.medicreminder.ui.model.RemindersListModel;
 
 import timber.log.Timber;
 

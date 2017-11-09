@@ -2,8 +2,8 @@ package com.tobikster.medicreminder.di;
 
 import android.app.Activity;
 
-import com.tobikster.medicreminder.presentation.MainActivity;
-import com.tobikster.medicreminder.presentation.RemindersComponent;
+import com.tobikster.medicreminder.ui.MainActivity;
+import com.tobikster.medicreminder.ui.RemindersComponent;
 
 import dagger.Binds;
 import dagger.Module;

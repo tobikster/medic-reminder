@@ -3,7 +3,7 @@ package com.tobikster.medicreminder.di;
 import android.app.Application;
 import android.content.Context;
 
-import com.tobikster.medicreminder.presentation.RemindersComponent;
+import com.tobikster.medicreminder.ui.RemindersComponent;
 
 import javax.inject.Singleton;
 

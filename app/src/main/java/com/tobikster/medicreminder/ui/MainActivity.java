@@ -1,4 +1,4 @@
-package com.tobikster.medicreminder.presentation;
+package com.tobikster.medicreminder.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.tobikster.medicreminder.presentation;
+package com.tobikster.medicreminder.ui;
 
 import dagger.Subcomponent;
 import dagger.android.AndroidInjector;

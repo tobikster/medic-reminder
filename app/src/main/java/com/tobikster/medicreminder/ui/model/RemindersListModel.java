@@ -1,4 +1,4 @@
-package com.tobikster.medicreminder.presentation.model;
+package com.tobikster.medicreminder.ui.model;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
