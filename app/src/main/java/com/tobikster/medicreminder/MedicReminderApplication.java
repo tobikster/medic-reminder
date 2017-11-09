@@ -1,10 +1,9 @@
 package com.tobikster.medicreminder;
 
 import android.app.Activity;
-import android.app.Application;
 
 import com.squareup.leakcanary.LeakCanary;
-import com.tobikster.medicreminder.di.DaggerAppComponent;
+import com.tobikster.medicreminder.ui.RemindersListActivity;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -12,10 +11,11 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
+import dagger.android.support.AndroidSupportInjectionModule;
+import dagger.android.support.DaggerApplication;
 import timber.log.Timber;
 
-public class MedicReminderApplication extends Application implements HasActivityInjector {
+public class MedicReminderApplication extends DaggerApplication {
 	@Inject
 	DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
 
@@ -29,8 +29,6 @@ public class MedicReminderApplication extends Application implements HasActivity
 			return;
 		}
 
-		DaggerAppComponent.builder().application(this).build().inject(this);
-
 		if (BuildConfig.DEBUG) {
 			Timber.plant(new Timber.DebugTree());
 		}
@@ -41,7 +39,13 @@ public class MedicReminderApplication extends Application implements HasActivity
 	}
 
 	@Override
-	public AndroidInjector<Activity> activityInjector() {
-		return activityDispatchingAndroidInjector;
+	protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+		return DaggerMedicReminderApplication_Component.builder().create(this);
+	}
+
+	@dagger.Component(modules = {AndroidSupportInjectionModule.class, RemindersListActivity.Module.class})
+	interface Component extends AndroidInjector<MedicReminderApplication> {
+		@dagger.Component.Builder
+		abstract class Builder extends AndroidInjector.Builder<MedicReminderApplication> {}
 	}
 }
