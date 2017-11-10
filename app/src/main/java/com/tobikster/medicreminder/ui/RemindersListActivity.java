@@ -1,17 +1,20 @@
 package com.tobikster.medicreminder.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
 import com.tobikster.medicreminder.R;
 
-import dagger.Binds;
-import dagger.android.ActivityKey;
-import dagger.android.AndroidInjector;
-import dagger.android.support.DaggerAppCompatActivity;
-import dagger.multibindings.IntoMap;
+import javax.inject.Inject;
 
-public class RemindersListActivity extends DaggerAppCompatActivity {
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+
+public class RemindersListActivity extends AppCompatActivity implements HasSupportFragmentInjector {
+	@Inject
+	DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,17 +25,8 @@ public class RemindersListActivity extends DaggerAppCompatActivity {
 		getSupportFragmentManager().beginTransaction().replace(R.id.content, remindersListFragment).commit();
 	}
 
-	@dagger.Subcomponent
-	public interface Component extends AndroidInjector<RemindersListActivity> {
-		@dagger.Subcomponent.Builder
-		abstract class Builder extends AndroidInjector.Builder<RemindersListActivity> {}
-	}
-
-	@dagger.Module(subcomponents = Component.class)
-	public interface Module {
-		@Binds
-		@IntoMap
-		@ActivityKey(RemindersListActivity.class)
-		AndroidInjector.Factory<? extends Activity> bind(Component.Builder builder);
+	@Override
+	public AndroidInjector<Fragment> supportFragmentInjector() {
+		return fragmentDispatchingAndroidInjector;
 	}
 }

@@ -11,6 +11,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RemindersRepository implements RemindersDataSource {
+	private RemindersRepository() {}
+
+	public static RemindersRepository getInstance() {
+		return InstanceHolder.INSTANCE;
+	}
 
 	@Override
 	public LiveData<List<Reminder>> getAllReminders() {
@@ -23,5 +28,11 @@ public class RemindersRepository implements RemindersDataSource {
 		                              new Reminder("Reminder 6", new LocalTime(14, 30)),
 		                              new Reminder("Reminder 7", new LocalTime(15, 0))));
 		return result;
+	}
+
+	private static class InstanceHolder {
+		private static final RemindersRepository INSTANCE = new RemindersRepository();
+
+		private InstanceHolder() {}
 	}
 }
