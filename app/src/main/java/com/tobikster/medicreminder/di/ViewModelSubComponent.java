@@ -1,6 +1,6 @@
 package com.tobikster.medicreminder.di;
 
-import com.tobikster.medicreminder.ui.model.RemindersListModel;
+import com.tobikster.medicreminder.ui.reminders.RemindersListModel;
 
 import dagger.Subcomponent;
 

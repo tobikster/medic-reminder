@@ -1,8 +1,9 @@
-package com.tobikster.medicreminder.ui;
+package com.tobikster.medicreminder.ui.reminders;
 
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,11 +14,10 @@ import android.view.ViewGroup;
 
 import com.tobikster.medicreminder.R;
 import com.tobikster.medicreminder.data.Reminder;
-import com.tobikster.medicreminder.di.Injectable;
-import com.tobikster.medicreminder.ui.model.RemindersListModel;
 
 import javax.inject.Inject;
 
+import dagger.android.support.AndroidSupportInjection;
 import timber.log.Timber;
 
 /**
@@ -25,7 +25,7 @@ import timber.log.Timber;
  * Use the {@link RemindersListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RemindersListFragment extends Fragment implements Injectable {
+public class RemindersListFragment extends Fragment {
 	@Inject
 	ViewModelProvider.Factory viewModelFactory;
 	private RemindersListModel remindersListModel;
@@ -42,6 +42,12 @@ public class RemindersListFragment extends Fragment implements Injectable {
 	 */
 	public static RemindersListFragment newInstance() {
 		return new RemindersListFragment();
+	}
+
+	@Override
+	public void onAttach(Context context) {
+		AndroidSupportInjection.inject(this);
+		super.onAttach(context);
 	}
 
 	@Override

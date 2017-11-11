@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.squareup.leakcanary.LeakCanary;
-import com.tobikster.medicreminder.di.AppInjector;
+import com.tobikster.medicreminder.di.DaggerAppComponent;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -29,7 +29,7 @@ public class MedicReminderApplication extends Application implements HasActivity
 			return;
 		}
 
-		AppInjector.init(this);
+		DaggerAppComponent.builder().application(this).build().inject(this);
 
 		if (BuildConfig.DEBUG) {
 			Timber.plant(new Timber.DebugTree());
