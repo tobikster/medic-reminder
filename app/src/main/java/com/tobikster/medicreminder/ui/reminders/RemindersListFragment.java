@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,8 +39,12 @@ public class RemindersListFragment extends Fragment {
 
 	@BindView(R.id.reminders)
 	RecyclerView remindersList;
+	@BindView(R.id.add_remind)
+	FloatingActionButton addReminderFab;
 
 	RemindersAdapter remindersAdapter;
+
+	private Interactor interactor;
 
 	public RemindersListFragment() {
 		// Required empty public constructor
@@ -59,6 +64,10 @@ public class RemindersListFragment extends Fragment {
 	public void onAttach(final Context context) {
 		AndroidSupportInjection.inject(this);
 		super.onAttach(context);
+
+		if (context instanceof Interactor) {
+			interactor = (Interactor) context;
+		}
 	}
 
 	@Override
@@ -74,6 +83,12 @@ public class RemindersListFragment extends Fragment {
 		remindersAdapter = new RemindersAdapter(this.getContext());
 		remindersList.setLayoutManager(new LinearLayoutManager(this.getContext()));
 		remindersList.setAdapter(remindersAdapter);
+
+		addReminderFab.setOnClickListener(clickedView -> {
+			if (interactor != null) {
+				interactor.onAddReminderButtonClicked();
+			}
+		});
 	}
 
 	@Override
@@ -96,4 +111,7 @@ public class RemindersListFragment extends Fragment {
 		unbinder.unbind();
 	}
 
+	public interface Interactor {
+		void onAddReminderButtonClicked();
+	}
 }

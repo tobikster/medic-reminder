@@ -1,4 +1,4 @@
-package com.tobikster.medicreminder.data;
+package com.tobikster.medicreminder.domain.model;
 
 import org.joda.time.LocalTime;
 
@@ -6,8 +6,8 @@ public class Reminder {
 	private String name;
 	private LocalTime time;
 
-	public Reminder(String name, LocalTime time) {
-		this.name = name;
+	public Reminder(final String title, final LocalTime time) {
+		this.name = title;
 		this.time = time;
 	}
 

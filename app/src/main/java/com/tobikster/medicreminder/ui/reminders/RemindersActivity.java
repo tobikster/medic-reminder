@@ -12,8 +12,9 @@ import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+import timber.log.Timber;
 
-public class RemindersListActivity extends AppCompatActivity implements HasSupportFragmentInjector {
+public class RemindersActivity extends AppCompatActivity implements HasSupportFragmentInjector, RemindersListFragment.Interactor {
 	@Inject
 	DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
@@ -30,5 +31,10 @@ public class RemindersListActivity extends AppCompatActivity implements HasSuppo
 	@Override
 	public AndroidInjector<Fragment> supportFragmentInjector() {
 		return fragmentDispatchingAndroidInjector;
+	}
+
+	@Override
+	public void onAddReminderButtonClicked() {
+		Timber.d("Now add reminder fragment should be shown...");
 	}
 }
