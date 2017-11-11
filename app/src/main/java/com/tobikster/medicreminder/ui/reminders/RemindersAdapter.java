@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tobikster.medicreminder.R;
-import com.tobikster.medicreminder.data.Reminder;
+import com.tobikster.medicreminder.ui.reminders.model.Reminder;
 
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;

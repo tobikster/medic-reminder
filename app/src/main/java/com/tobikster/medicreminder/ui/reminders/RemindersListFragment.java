@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tobikster.medicreminder.R;
+import com.tobikster.medicreminder.ui.reminders.model.RemindersListModel;
 
 import javax.inject.Inject;
 
@@ -86,7 +87,7 @@ public class RemindersListFragment extends Fragment {
 	public void onStart() {
 		super.onStart();
 
-		remindersListModel.getReminders().observe(this, reminders -> remindersAdapter.setData(reminders));
+		remindersListModel.remindersList.observe(this, reminders -> remindersAdapter.setData(reminders));
 	}
 
 	@Override
