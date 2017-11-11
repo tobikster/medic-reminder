@@ -45,19 +45,18 @@ public class RemindersListFragment extends Fragment {
 	}
 
 	@Override
-	public void onAttach(Context context) {
+	public void onAttach(final Context context) {
 		AndroidSupportInjection.inject(this);
 		super.onAttach(context);
 	}
 
 	@Override
-	public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_reminders_list, container, false);
 	}
 
 	@Override
-	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+	public void onActivityCreated(final @Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
 		remindersListModel = ViewModelProviders.of(this, viewModelFactory).get(RemindersListModel.class);
