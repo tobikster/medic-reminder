@@ -8,17 +8,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.tobikster.medicreminder.R;
-import com.tobikster.medicreminder.data.Reminder;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import dagger.android.support.AndroidSupportInjection;
-import timber.log.Timber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +32,13 @@ public class RemindersListFragment extends Fragment {
 	@Inject
 	ViewModelProvider.Factory viewModelFactory;
 	private RemindersListModel remindersListModel;
+
+	private Unbinder unbinder;
+
+	@BindView(R.id.reminders)
+	RecyclerView remindersList;
+
+	RemindersAdapter remindersAdapter;
 
 	public RemindersListFragment() {
 		// Required empty public constructor
@@ -56,6 +66,16 @@ public class RemindersListFragment extends Fragment {
 	}
 
 	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		unbinder = ButterKnife.bind(this, view);
+
+		remindersAdapter = new RemindersAdapter(this.getContext());
+		remindersList.setLayoutManager(new LinearLayoutManager(this.getContext()));
+		remindersList.setAdapter(remindersAdapter);
+	}
+
+	@Override
 	public void onActivityCreated(final @Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
@@ -66,12 +86,13 @@ public class RemindersListFragment extends Fragment {
 	public void onStart() {
 		super.onStart();
 
-		remindersListModel.getReminders().observe(this, reminders -> {
-			if (reminders != null) {
-				for (Reminder reminder : reminders) {
-					Timber.d("Reminder %s at %s", reminder.getName(), reminder.getTime());
-				}
-			}
-		});
+		remindersListModel.getReminders().observe(this, reminders -> remindersAdapter.setData(reminders));
 	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unbinder.unbind();
+	}
+
 }
