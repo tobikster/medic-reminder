@@ -22,6 +22,7 @@ public class ReminderViewModelFactory implements ViewModelProvider.Factory {
 		creators = new ArrayMap<>();
 
 		creators.put(RemindersListModel.class, viewModelSubComponent::remindersListModel);
+		creators.put(ReminderDetailsModel.class, viewModelSubComponent::reminderDetailsModel);
 	}
 
 	@NonNull
