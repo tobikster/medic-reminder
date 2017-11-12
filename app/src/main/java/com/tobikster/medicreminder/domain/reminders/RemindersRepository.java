@@ -1,9 +1,9 @@
-package com.tobikster.medicreminder.domain;
+package com.tobikster.medicreminder.domain.reminders;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
-import com.tobikster.medicreminder.domain.model.Reminder;
+import com.tobikster.medicreminder.domain.reminders.model.Reminder;
 
 import org.joda.time.LocalTime;
 

@@ -2,8 +2,8 @@ package com.tobikster.medicreminder.di;
 
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.tobikster.medicreminder.domain.RemindersDataSource;
-import com.tobikster.medicreminder.domain.RemindersRepository;
+import com.tobikster.medicreminder.domain.reminders.RemindersDataSource;
+import com.tobikster.medicreminder.domain.reminders.RemindersRepository;
 import com.tobikster.medicreminder.ui.reminders.model.ReminderViewModelFactory;
 
 import javax.inject.Singleton;

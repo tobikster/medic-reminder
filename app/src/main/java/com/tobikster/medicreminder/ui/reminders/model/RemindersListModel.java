@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 
-import com.tobikster.medicreminder.domain.RemindersDataSource;
+import com.tobikster.medicreminder.domain.reminders.RemindersDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class RemindersListModel extends ViewModel {
 		this.remindersDataSource = remindersDataSource;
 		remindersList = Transformations.map(this.remindersDataSource.getAllReminders(), reminders -> {
 			List<Reminder> result = new ArrayList<>();
-			for(com.tobikster.medicreminder.domain.model.Reminder reminder: reminders) {
+			for(com.tobikster.medicreminder.domain.reminders.model.Reminder reminder: reminders) {
 				result.add(new Reminder(reminder.getName(), reminder.getTime()));
 			}
 			return result;

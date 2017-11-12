@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.tobikster.medicreminder.domain.RemindersDataSource;
+import com.tobikster.medicreminder.domain.reminders.RemindersDataSource;
 
 import javax.inject.Inject;
 
