@@ -6,8 +6,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.tobikster.medicreminder.data.reminders.RemindersDataSource;
 
-import org.joda.time.LocalTime;
-
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 

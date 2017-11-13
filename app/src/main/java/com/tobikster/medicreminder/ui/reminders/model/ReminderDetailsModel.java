@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.tobikster.medicreminder.data.reminders.RemindersDataSource;
 
-import org.joda.time.LocalTime;
+import java.time.LocalTime;
 
 import javax.inject.Inject;
 
@@ -19,6 +19,7 @@ public class ReminderDetailsModel extends ViewModel {
 	public ReminderDetailsModel(final RemindersDataSource remindersDataSource) {
 		this.remindersDataSource = remindersDataSource;
 		reminderLiveData = new MutableLiveData<>();
+		((MutableLiveData<Reminder>) reminderLiveData).setValue(null);
 	}
 
 	public class Reminder {
@@ -33,7 +34,7 @@ public class ReminderDetailsModel extends ViewModel {
 			return time;
 		}
 
-		public Reminder(String title, LocalTime time) {
+		Reminder(String title, LocalTime time) {
 
 			this.title = title;
 			this.time = time;

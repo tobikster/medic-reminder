@@ -19,9 +19,7 @@ import android.widget.TextView;
 import com.tobikster.medicreminder.R;
 import com.tobikster.medicreminder.ui.reminders.model.RemindersListModel;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,7 +117,6 @@ public class RemindersListFragment extends Fragment {
 	}
 
 	static class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.ReminderViewHolder> {
-		static final String REMINDER_TIME_FORMAT = "-S";
 
 		private Context context;
 		private List<RemindersListModel.Reminder> reminders;
@@ -162,8 +159,7 @@ public class RemindersListFragment extends Fragment {
 
 			void bind(final RemindersListModel.Reminder reminder) {
 				this.textView.setText(reminder.getTitle());
-				final DateTimeFormatter timeFormatter = DateTimeFormat.forStyle(REMINDER_TIME_FORMAT);
-				this.timeView.setText(timeFormatter.print(reminder.getTime()));
+				this.timeView.setText(DateTimeFormatter.ISO_LOCAL_TIME.format(reminder.getTime()));
 			}
 		}
 	}
