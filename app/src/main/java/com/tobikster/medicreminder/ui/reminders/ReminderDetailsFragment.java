@@ -48,8 +48,5 @@ public class ReminderDetailsFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		reminderDetailsModel.reminder.observe(this, reminder -> {
-
-		});
 	}
 }

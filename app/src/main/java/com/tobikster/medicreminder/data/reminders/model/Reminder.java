@@ -1,4 +1,4 @@
-package com.tobikster.medicreminder.domain.reminders.model;
+package com.tobikster.medicreminder.data.reminders.model;
 
 import org.joda.time.LocalTime;
 

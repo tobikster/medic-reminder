@@ -14,9 +14,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.tobikster.medicreminder.R;
 import com.tobikster.medicreminder.ui.reminders.model.RemindersListModel;
+
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -42,7 +49,7 @@ public class RemindersListFragment extends Fragment {
 	@BindView(R.id.add_remind)
 	FloatingActionButton addReminderFab;
 
-	RemindersAdapter remindersAdapter;
+	private RemindersAdapter remindersAdapter;
 
 	private Interactor interactor;
 
@@ -109,6 +116,54 @@ public class RemindersListFragment extends Fragment {
 	public void onDestroy() {
 		super.onDestroy();
 		unbinder.unbind();
+	}
+
+	static class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.ReminderViewHolder> {
+		private Context context;
+		private List<RemindersListModel.Reminder> reminders;
+
+		RemindersAdapter(final Context context) {
+			this.context = context;
+		}
+
+		public void setData(final List<RemindersListModel.Reminder> reminders) {
+			this.reminders = new ArrayList<>(reminders);
+			notifyDataSetChanged();
+		}
+
+		@Override
+		public ReminderViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+			final View view = LayoutInflater.from(context).inflate(R.layout.reminder_list_item, parent, false);
+			return new ReminderViewHolder(view);
+		}
+
+		@Override
+		public void onBindViewHolder(final ReminderViewHolder holder, final int position) {
+			holder.bind(reminders.get(position));
+		}
+
+		@Override
+		public int getItemCount() {
+			return reminders.size();
+		}
+
+		static class ReminderViewHolder extends RecyclerView.ViewHolder {
+			@BindView(R.id.title)
+			TextView textView;
+			@BindView(R.id.time)
+			TextView timeView;
+
+			ReminderViewHolder(View itemView) {
+				super(itemView);
+				ButterKnife.bind(this, itemView);
+			}
+
+			void bind(final RemindersListModel.Reminder reminder) {
+				this.textView.setText(reminder.getTitle());
+				final DateTimeFormatter timeFormatter = DateTimeFormat.forStyle("-S");
+				this.timeView.setText(timeFormatter.print(reminder.getTime()));
+			}
+		}
 	}
 
 	public interface Interactor {
