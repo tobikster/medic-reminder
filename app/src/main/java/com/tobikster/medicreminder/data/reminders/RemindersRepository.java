@@ -35,15 +35,20 @@ public class RemindersRepository implements RemindersDataSource {
 	}
 
 	@Override
-	public void addReminder(final Reminder reminder) {
-		final List<Reminder> remindersList = this.reminders.getValue();
-		if (remindersList != null &&
-		    reminder.getName() != null &&
-		    reminder.getName().length() > 0 &&
-		    reminder.getTime() != null) {
-			remindersList.add(reminder);
-			this.reminders.setValue(remindersList);
+	public boolean addReminder(final Reminder reminder) {
+		boolean result = false;
+		if (reminder.getName() != null && reminder.getName().length() > 0 && reminder.getTime() != null) {
+			final List<Reminder> remindersList = this.reminders.getValue();
+			if (remindersList != null &&
+			    reminder.getName() != null &&
+			    reminder.getName().length() > 0 &&
+			    reminder.getTime() != null) {
+				remindersList.add(reminder);
+				this.reminders.setValue(remindersList);
+				result = true;
+			}
 		}
+		return result;
 	}
 
 	private static class InstanceHolder {

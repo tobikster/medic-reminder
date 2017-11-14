@@ -14,7 +14,8 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
 public class RemindersActivity extends AppCompatActivity implements HasSupportFragmentInjector,
-                                                                    RemindersListFragment.Interactor {
+                                                                    RemindersListFragment.Interactor,
+                                                                    ReminderDetailsFragment.Interactor {
 	@Inject
 	DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
@@ -39,6 +40,15 @@ public class RemindersActivity extends AppCompatActivity implements HasSupportFr
 		getSupportFragmentManager().beginTransaction()
 		                           .addToBackStack(null)
 		                           .replace(R.id.content, reminderDetailsFragment)
+		                           .commit();
+	}
+
+	@Override
+	public void onReminderAdded() {
+		final RemindersListFragment remindersListFragment = RemindersListFragment.newInstance();
+		getSupportFragmentManager().beginTransaction()
+		                           .addToBackStack(null)
+		                           .replace(R.id.content, remindersListFragment)
 		                           .commit();
 	}
 }

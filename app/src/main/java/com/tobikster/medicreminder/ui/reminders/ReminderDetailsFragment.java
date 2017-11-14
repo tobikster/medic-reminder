@@ -3,6 +3,7 @@ package com.tobikster.medicreminder.ui.reminders;
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,8 +12,10 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.tobikster.medicreminder.R;
 import com.tobikster.medicreminder.ui.reminders.model.ReminderDetailsModel;
@@ -37,12 +40,25 @@ public class ReminderDetailsFragment extends Fragment {
 	@BindView(R.id.time)
 	TimePicker timeEditor;
 
+	@BindView(R.id.save_button)
+	Button saveButton;
+
+	private Interactor interactor;
+
 	public ReminderDetailsFragment() {
 		// Required empty public constructor
 	}
 
 	public static ReminderDetailsFragment newInstance() {
 		return new ReminderDetailsFragment();
+	}
+
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		if (context instanceof Interactor) {
+			interactor = (Interactor) context;
+		}
 	}
 
 	@Override
@@ -65,6 +81,17 @@ public class ReminderDetailsFragment extends Fragment {
 		ButterKnife.bind(this, view);
 
 		timeEditor.setIs24HourView(DateFormat.is24HourFormat(getContext()));
+		saveButton.setOnClickListener(clickedView -> {
+			if (reminderDetailsModel.addReminder(titleEditor.getText().toString(),
+			                                 timeEditor.getHour(),
+			                                 timeEditor.getMinute())) {
+				if (interactor != null) {
+					interactor.onReminderAdded();
+				}
+			} else {
+				Toast.makeText(getContext(), "Cannot add reminder", Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	@Override
@@ -81,5 +108,9 @@ public class ReminderDetailsFragment extends Fragment {
 				}
 			}
 		});
+	}
+
+	public interface Interactor {
+		void onReminderAdded();
 	}
 }

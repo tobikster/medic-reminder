@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface RemindersDataSource {
 	LiveData<List<Reminder>> getAllReminders();
-	void addReminder(final Reminder reminder);
+	boolean addReminder(final Reminder reminder);
 }

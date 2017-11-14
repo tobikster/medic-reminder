@@ -6,7 +6,6 @@ import android.arch.lifecycle.ViewModel;
 
 import com.tobikster.medicreminder.data.reminders.RemindersDataSource;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,23 +23,5 @@ public class RemindersListModel extends ViewModel {
 			}
 			return result;
 		});
-	}
-
-	public class Reminder {
-		private String title;
-		private LocalTime time;
-
-		Reminder(String title, LocalTime time) {
-			this.title = title;
-			this.time = time;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public LocalTime getTime() {
-			return time;
-		}
 	}
 }

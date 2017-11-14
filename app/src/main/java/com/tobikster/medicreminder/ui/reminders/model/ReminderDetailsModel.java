@@ -22,22 +22,13 @@ public class ReminderDetailsModel extends ViewModel {
 		((MutableLiveData<Reminder>) reminderLiveData).setValue(null);
 	}
 
-	public class Reminder {
-		private String title;
-		private LocalTime time;
-
-		public String getTitle() {
-			return title;
+	public boolean addReminder(String title, int hour, int minute) {
+		boolean reminderAdded = false;
+		if (title != null && title.length() > 0 && hour >= 0 && hour < 24 && minute >= 0 && minute < 60) {
+			final com.tobikster.medicreminder.data.reminders.model.Reminder reminder =
+					new com.tobikster.medicreminder.data.reminders.model.Reminder(title, LocalTime.of(hour, minute));
+			reminderAdded = remindersDataSource.addReminder(reminder);
 		}
-
-		public LocalTime getTime() {
-			return time;
-		}
-
-		Reminder(String title, LocalTime time) {
-
-			this.title = title;
-			this.time = time;
-		}
+		return reminderAdded;
 	}
 }

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tobikster.medicreminder.R;
+import com.tobikster.medicreminder.ui.reminders.model.Reminder;
 import com.tobikster.medicreminder.ui.reminders.model.RemindersListModel;
 
 import java.time.format.DateTimeFormatter;
@@ -119,13 +120,13 @@ public class RemindersListFragment extends Fragment {
 	static class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.ReminderViewHolder> {
 
 		private Context context;
-		private List<RemindersListModel.Reminder> reminders;
+		private List<Reminder> reminders;
 
 		RemindersAdapter(final Context context) {
 			this.context = context;
 		}
 
-		public void setData(final List<RemindersListModel.Reminder> reminders) {
+		public void setData(final List<Reminder> reminders) {
 			this.reminders = new ArrayList<>(reminders);
 			notifyDataSetChanged();
 		}
@@ -157,7 +158,7 @@ public class RemindersListFragment extends Fragment {
 				ButterKnife.bind(this, itemView);
 			}
 
-			void bind(final RemindersListModel.Reminder reminder) {
+			void bind(final Reminder reminder) {
 				this.textView.setText(reminder.getTitle());
 				this.timeView.setText(DateTimeFormatter.ISO_LOCAL_TIME.format(reminder.getTime()));
 			}
