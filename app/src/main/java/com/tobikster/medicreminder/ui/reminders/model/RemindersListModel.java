@@ -1,40 +1,27 @@
 package com.tobikster.medicreminder.ui.reminders.model;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Transformations;
-import android.support.annotation.NonNull;
+import android.arch.lifecycle.ViewModel;
 
-import com.tobikster.medicreminder.domain.RemindersDataSource;
-
-import org.joda.time.LocalTime;
+import com.tobikster.medicreminder.data.reminders.RemindersDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class RemindersListModel extends AndroidViewModel {
+public class RemindersListModel extends ViewModel {
 	public final LiveData<List<Reminder>> remindersList;
-	private final RemindersDataSource remindersDataSource;
 
 	@Inject
-	public RemindersListModel(final @NonNull Application application, final RemindersDataSource remindersDataSource) {
-		super(application);
-		this.remindersDataSource = remindersDataSource;
-		remindersList = Transformations.map(this.remindersDataSource.getAllReminders(), reminders -> {
+	public RemindersListModel(final RemindersDataSource remindersDataSource) {
+		remindersList = Transformations.map(remindersDataSource.getAllReminders(), reminders -> {
 			List<Reminder> result = new ArrayList<>();
-			for(com.tobikster.medicreminder.domain.model.Reminder reminder: reminders) {
+			for(com.tobikster.medicreminder.data.reminders.model.Reminder reminder: reminders) {
 				result.add(new Reminder(reminder.getName(), reminder.getTime()));
 			}
 			return result;
 		});
-	}
-
-	public void addReminder(final String name, final LocalTime time) {
-		if (name != null && name.length() > 0 && time != null) {
-			this.remindersDataSource.addReminder(new com.tobikster.medicreminder.domain.model.Reminder(name, time));
-		}
 	}
 }

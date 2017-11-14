@@ -8,4 +8,11 @@
 		<item name="colorAccent">@color/colorAccent</item>
 	</style>
 
+	<style name="CardView.Reminder" parent="CardView.Light">
+		<item name="android:layout_marginTop">@dimen/card_vertical_margin</item>
+		<item name="android:layout_marginBottom">@dimen/card_vertical_margin</item>
+		<item name="android:layout_marginStart">@dimen/card_horizontal_margin</item>
+		<item name="android:layout_marginEnd">@dimen/card_horizontal_margin</item>
+	</style>
+
 </resources>

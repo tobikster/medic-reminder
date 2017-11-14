@@ -1,19 +1,19 @@
 package com.tobikster.medicreminder.ui.reminders.model;
 
-
-import org.joda.time.LocalTime;
+import java.time.LocalTime;
 
 public class Reminder {
-	private String name;
+	private String title;
 	private LocalTime time;
 
-	Reminder(String name, LocalTime time) {
-		this.name = name;
+	Reminder(final String title, final LocalTime time) {
+
+		this.title = title;
 		this.time = time;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
 	public LocalTime getTime() {

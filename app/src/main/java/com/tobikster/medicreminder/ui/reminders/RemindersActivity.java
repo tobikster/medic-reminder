@@ -12,9 +12,10 @@ import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
-import timber.log.Timber;
 
-public class RemindersActivity extends AppCompatActivity implements HasSupportFragmentInjector, RemindersListFragment.Interactor {
+public class RemindersActivity extends AppCompatActivity implements HasSupportFragmentInjector,
+                                                                    RemindersListFragment.Interactor,
+                                                                    ReminderDetailsFragment.Interactor {
 	@Inject
 	DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
@@ -24,7 +25,7 @@ public class RemindersActivity extends AppCompatActivity implements HasSupportFr
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		RemindersListFragment remindersListFragment = RemindersListFragment.newInstance();
+		final RemindersListFragment remindersListFragment = RemindersListFragment.newInstance();
 		getSupportFragmentManager().beginTransaction().replace(R.id.content, remindersListFragment).commit();
 	}
 
@@ -35,6 +36,19 @@ public class RemindersActivity extends AppCompatActivity implements HasSupportFr
 
 	@Override
 	public void onAddReminderButtonClicked() {
-		Timber.d("Now add reminder fragment should be shown...");
+		final ReminderDetailsFragment reminderDetailsFragment = ReminderDetailsFragment.newInstance();
+		getSupportFragmentManager().beginTransaction()
+		                           .addToBackStack(null)
+		                           .replace(R.id.content, reminderDetailsFragment)
+		                           .commit();
+	}
+
+	@Override
+	public void onReminderAdded() {
+		final RemindersListFragment remindersListFragment = RemindersListFragment.newInstance();
+		getSupportFragmentManager().beginTransaction()
+		                           .addToBackStack(null)
+		                           .replace(R.id.content, remindersListFragment)
+		                           .commit();
 	}
 }

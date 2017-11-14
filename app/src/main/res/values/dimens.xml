@@ -3,4 +3,6 @@
 	<dimen name="fab_bottom_margin">20dp</dimen>
 	<dimen name="fab_end_margin">20dp</dimen>
 	<dimen name="fab_elevation">4dp</dimen>
+	<dimen name="card_vertical_margin">4dp</dimen>
+	<dimen name="card_horizontal_margin">4dp</dimen>
 </resources>

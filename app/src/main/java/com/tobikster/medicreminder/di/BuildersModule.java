@@ -1,5 +1,6 @@
 package com.tobikster.medicreminder.di;
 
+import com.tobikster.medicreminder.ui.reminders.ReminderDetailsFragment;
 import com.tobikster.medicreminder.ui.reminders.RemindersActivity;
 import com.tobikster.medicreminder.ui.reminders.RemindersListFragment;
 
@@ -9,9 +10,11 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public interface BuildersModule {
 	@ContributesAndroidInjector
-	RemindersListFragment contributeRemindersListFragment();
-
+	RemindersActivity contributeRemindersListActivity();
 
 	@ContributesAndroidInjector
-	RemindersActivity contributeRemindersListActivity();
+	RemindersListFragment contributeRemindersListFragment();
+
+	@ContributesAndroidInjector
+	ReminderDetailsFragment contributeReminderDetailFragment();
 }
