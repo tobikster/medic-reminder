@@ -37,12 +37,9 @@ public class RemindersRepository implements RemindersDataSource {
 	@Override
 	public boolean addReminder(final Reminder reminder) {
 		boolean result = false;
-		if (reminder.getName() != null && reminder.getName().length() > 0 && reminder.getTime() != null) {
+		if (reminder.getName().length() > 0) {
 			final List<Reminder> remindersList = this.reminders.getValue();
-			if (remindersList != null &&
-			    reminder.getName() != null &&
-			    reminder.getName().length() > 0 &&
-			    reminder.getTime() != null) {
+			if (remindersList != null && reminder.getName().length() > 0) {
 				remindersList.add(reminder);
 				this.reminders.setValue(remindersList);
 				result = true;
