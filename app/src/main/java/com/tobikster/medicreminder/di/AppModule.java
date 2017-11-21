@@ -15,8 +15,8 @@ import dagger.Provides;
 class AppModule {
 	@Singleton
 	@Provides
-	RemindersDataSource provideReminderDataSource() {
-		return RemindersRepository.getInstance();
+	RemindersDataSource provideReminderDataSource(final RemindersRepository remindersRepository) {
+		return remindersRepository;
 	}
 
 	@Singleton

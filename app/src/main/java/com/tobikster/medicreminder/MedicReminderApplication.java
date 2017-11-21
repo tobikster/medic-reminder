@@ -6,8 +6,6 @@ import android.app.Application;
 import com.squareup.leakcanary.LeakCanary;
 import com.tobikster.medicreminder.di.DaggerAppComponent;
 
-import net.danlew.android.joda.JodaTimeAndroid;
-
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
@@ -36,8 +34,6 @@ public class MedicReminderApplication extends Application implements HasActivity
 		}
 
 		LeakCanary.install(this);
-
-		JodaTimeAndroid.init(this);
 	}
 
 
