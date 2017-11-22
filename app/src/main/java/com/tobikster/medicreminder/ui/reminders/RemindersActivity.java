@@ -36,7 +36,7 @@ public class RemindersActivity extends AppCompatActivity implements HasSupportFr
 
 	@Override
 	public void onAddReminderButtonClicked() {
-		final ReminderDetailsFragment reminderDetailsFragment = ReminderDetailsFragment.newInstance();
+		final ReminderDetailsFragment reminderDetailsFragment = ReminderDetailsFragment.Companion.newInstance();
 		getSupportFragmentManager().beginTransaction()
 		                           .addToBackStack(null)
 		                           .replace(R.id.content, reminderDetailsFragment)

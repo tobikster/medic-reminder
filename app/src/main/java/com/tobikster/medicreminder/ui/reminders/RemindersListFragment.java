@@ -1,6 +1,7 @@
 package com.tobikster.medicreminder.ui.reminders;
 
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -66,6 +67,7 @@ public class RemindersListFragment extends Fragment {
 		return new RemindersListFragment();
 	}
 
+	@SuppressLint("CheckResult")
 	@Override
 	public void onAttach(final Context context) {
 		AndroidSupportInjection.inject(this);
@@ -108,7 +110,7 @@ public class RemindersListFragment extends Fragment {
 	public void onStart() {
 		super.onStart();
 
-		remindersListModel.remindersList.observe(this, reminders -> remindersAdapter.setData(reminders));
+		remindersListModel.getRemindersList().observe(this, reminders -> remindersAdapter.setData(reminders));
 	}
 
 	@Override
