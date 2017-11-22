@@ -16,7 +16,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TimePicker
 import android.widget.Toast
-import butterknife.ButterKnife
 import com.tobikster.medicreminder.R
 import com.tobikster.medicreminder.ui.reminders.model.Reminder
 import com.tobikster.medicreminder.ui.reminders.model.ReminderDetailsModel
@@ -57,7 +56,6 @@ class ReminderDetailsFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		ButterKnife.bind(this, view)
 
 		timeEditor.setIs24HourView(DateFormat.is24HourFormat(context))
 		saveButton.setOnClickListener {
