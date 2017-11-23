@@ -20,10 +20,10 @@ class ReminderDetailsModel @Inject constructor(
 		(reminderLiveData as MutableLiveData<Reminder>).value = null
 	}
 
-	fun addReminder(title: String?, hour: Int, minute: Int): Boolean {
+	fun addReminder(title: String, hour: Int, minute: Int): Boolean {
 		var reminderAdded = false
-		if (title != null && title.isNotEmpty() && hour >= 0 && hour < 24 && minute >= 0 && minute < 60) {
-			val reminder = com.tobikster.medicreminder.data.reminders.model.Reminder(title, LocalTime.of(hour, minute))
+		if (title.isNotEmpty() && hour >= 0 && hour < 24 && minute >= 0 && minute < 60) {
+			val reminder = com.tobikster.medicreminder.data.reminders.Reminder(0, title, LocalTime.of(hour, minute))
 			reminderAdded = remindersDataSource.addReminder(reminder)
 		}
 		return reminderAdded

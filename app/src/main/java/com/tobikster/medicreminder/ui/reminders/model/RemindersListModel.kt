@@ -11,7 +11,7 @@ class RemindersListModel @Inject constructor(
 		remindersDataSource: RemindersDataSource
 ) : ViewModel() {
 	val remindersList: LiveData<List<Reminder>> =
-			Transformations.map<List<com.tobikster.medicreminder.data.reminders.model.Reminder>, List<Reminder>>(remindersDataSource.getAllReminders(), {
+			Transformations.map<List<com.tobikster.medicreminder.data.reminders.Reminder>, List<Reminder>>(remindersDataSource.getAllReminders(), {
 				it.map { Reminder(it.name, it.time) }
 			})
 
