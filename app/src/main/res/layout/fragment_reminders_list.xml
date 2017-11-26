@@ -7,12 +7,12 @@
                                                  tools:context=".ui.reminders.RemindersListFragment">
 
 	<android.support.v7.widget.RecyclerView
-		android:id="@+id/reminders"
+		android:id="@+id/reminders_list"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"/>
 
 	<android.support.design.widget.FloatingActionButton
-		android:id="@+id/add_remind"
+		android:id="@+id/add_reminder_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/fab_bottom_margin"
@@ -20,7 +20,7 @@
 		android:src="@android:drawable/ic_input_add"
 		app:elevation="@dimen/fab_elevation"
 		app:fabSize="normal"
-		app:layout_anchor="@+id/reminders"
+		app:layout_anchor="@+id/reminders_list"
 		app:layout_anchorGravity="end|bottom" />
 
 </android.support.design.widget.CoordinatorLayout>

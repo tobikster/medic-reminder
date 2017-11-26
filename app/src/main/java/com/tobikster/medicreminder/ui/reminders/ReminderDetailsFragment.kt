@@ -12,25 +12,18 @@ import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TimePicker
 import android.widget.Toast
 import com.tobikster.medicreminder.R
 import com.tobikster.medicreminder.ui.reminders.model.Reminder
 import com.tobikster.medicreminder.ui.reminders.model.ReminderDetailsModel
 import dagger.android.support.AndroidSupportInjection
-import kotterknife.bindView
+import kotlinx.android.synthetic.main.fragment_reminder_details.*
 import javax.inject.Inject
 
 class ReminderDetailsFragment : Fragment() {
 	@Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
 	private lateinit var reminderDetailsModel: ReminderDetailsModel
-
-	private val titleEditor: EditText by bindView(R.id.title)
-	private val timeEditor: TimePicker by bindView(R.id.time)
-	private val saveButton: Button by bindView(R.id.save_button)
 
 	private var interactor: Interactor? = null
 
@@ -49,19 +42,17 @@ class ReminderDetailsFragment : Fragment() {
 		reminderDetailsModel = ViewModelProviders.of(this, viewModelFactory).get(ReminderDetailsModel::class.java)
 	}
 
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_reminder_details, container, false)
-	}
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =// Inflate the layout for this fragment
+			inflater.inflate(R.layout.fragment_reminder_details, container, false)
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		timeEditor.setIs24HourView(DateFormat.is24HourFormat(context))
-		saveButton.setOnClickListener {
-			if (reminderDetailsModel.addReminder(titleEditor.text.toString(),
-					timeEditor.hour,
-					timeEditor.minute)) {
+		time_editor.setIs24HourView(DateFormat.is24HourFormat(context))
+		save_button.setOnClickListener {
+			if (reminderDetailsModel.addReminder(title_editor.text.toString(),
+			                                     time_editor.hour,
+			                                     time_editor.minute)) {
 				if (interactor != null) {
 					interactor!!.onReminderAdded()
 				}
@@ -76,10 +67,10 @@ class ReminderDetailsFragment : Fragment() {
 
 		reminderDetailsModel.reminderLiveData.observe(this, Observer<Reminder> {
 			if (it != null) {
-				titleEditor.setText(it.title)
-				val time = it.time
-				timeEditor.hour = time.hour
-				timeEditor.minute = time.minute
+				title_editor.setText(it.title)
+				val reminderTime = it.time
+				time_editor.hour = reminderTime.hour
+				time_editor.minute = reminderTime.minute
 			}
 		})
 	}
@@ -89,8 +80,6 @@ class ReminderDetailsFragment : Fragment() {
 	}
 
 	companion object {
-		fun newInstance(): ReminderDetailsFragment {
-			return ReminderDetailsFragment()
-		}
+		fun newInstance(): ReminderDetailsFragment = ReminderDetailsFragment()
 	}
 }

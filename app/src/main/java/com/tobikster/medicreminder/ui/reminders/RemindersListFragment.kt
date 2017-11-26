@@ -7,7 +7,6 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -19,9 +18,11 @@ import com.tobikster.medicreminder.R
 import com.tobikster.medicreminder.ui.reminders.model.Reminder
 import com.tobikster.medicreminder.ui.reminders.model.RemindersListModel
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_reminders_list.*
 import kotterknife.bindView
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
+
 /**
  * A simple [Fragment] subclass.
  * Use the [RemindersListFragment.newInstance] factory method to
@@ -42,9 +43,6 @@ class RemindersListFragment : Fragment() {
 	@Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
 	private lateinit var remindersListModel: RemindersListModel
-
-	private val remindersList: RecyclerView by bindView(R.id.reminders)
-	private val addReminderFab: FloatingActionButton by bindView(R.id.add_remind)
 
 	private lateinit var remindersAdapter: RemindersAdapter
 
@@ -67,10 +65,10 @@ class RemindersListFragment : Fragment() {
 		super.onViewCreated(view, savedInstanceState)
 
 		remindersAdapter = RemindersAdapter(this.context!!)
-		remindersList.layoutManager = LinearLayoutManager(this.context)
-		remindersList.adapter = remindersAdapter
+		reminders_list.layoutManager = LinearLayoutManager(this.context)
+		reminders_list.adapter = remindersAdapter
 
-		addReminderFab.setOnClickListener {
+		add_reminder_button.setOnClickListener {
 			if (interactor != null) {
 				interactor!!.onAddReminderButtonClicked()
 			}
@@ -90,6 +88,7 @@ class RemindersListFragment : Fragment() {
 			remindersAdapter.setData(it ?: emptyList())
 		})
 	}
+
 	private class RemindersAdapter(private val context: Context) : RecyclerView.Adapter<RemindersAdapter.ReminderViewHolder>() {
 
 		private val reminders: MutableList<Reminder> = ArrayList()
@@ -121,6 +120,7 @@ class RemindersListFragment : Fragment() {
 		}
 
 	}
+
 	interface Interactor {
 		fun onAddReminderButtonClicked()
 
