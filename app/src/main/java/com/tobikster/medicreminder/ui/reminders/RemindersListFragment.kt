@@ -22,14 +22,25 @@ import dagger.android.support.AndroidSupportInjection
 import kotterknife.bindView
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
-
 /**
  * A simple [Fragment] subclass.
  * Use the [RemindersListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class RemindersListFragment : Fragment() {
+	companion object {
+
+		/**
+		 * Use this factory method to create a new instance of
+		 * this fragment using the provided parameters.
+		 *
+		 * @return A new instance of fragment RemindersListFragment.
+		 */
+		fun newInstance(): RemindersListFragment = RemindersListFragment()
+	}
+
 	@Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+
 	private lateinit var remindersListModel: RemindersListModel
 
 	private val remindersList: RecyclerView by bindView(R.id.reminders)
@@ -49,9 +60,8 @@ class RemindersListFragment : Fragment() {
 		}
 	}
 
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-		return inflater.inflate(R.layout.fragment_reminders_list, container, false)
-	}
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+			inflater.inflate(R.layout.fragment_reminders_list, container, false)
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
@@ -80,8 +90,8 @@ class RemindersListFragment : Fragment() {
 			remindersAdapter.setData(it ?: emptyList())
 		})
 	}
+	private class RemindersAdapter(private val context: Context) : RecyclerView.Adapter<RemindersAdapter.ReminderViewHolder>() {
 
-	internal class RemindersAdapter(private val context: Context) : RecyclerView.Adapter<RemindersAdapter.ReminderViewHolder>() {
 		private val reminders: MutableList<Reminder> = ArrayList()
 
 		fun setData(reminders: List<Reminder>) {
@@ -99,35 +109,20 @@ class RemindersListFragment : Fragment() {
 			holder.bind(reminders[position])
 		}
 
-		override fun getItemCount(): Int {
-			return reminders.size
-		}
-
+		override fun getItemCount(): Int = reminders.size
 		internal class ReminderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 			private val textView: TextView by bindView(R.id.title)
-			private val timeView: TextView by bindView(R.id.time)
 
+			private val timeView: TextView by bindView(R.id.time)
 			fun bind(reminder: Reminder) {
 				this.textView.text = reminder.title
 				this.timeView.text = DateTimeFormatter.ISO_LOCAL_TIME.format(reminder.time)
 			}
 		}
-	}
 
+	}
 	interface Interactor {
 		fun onAddReminderButtonClicked()
-	}
 
-	companion object {
-
-		/**
-		 * Use this factory method to create a new instance of
-		 * this fragment using the provided parameters.
-		 *
-		 * @return A new instance of fragment RemindersListFragment.
-		 */
-		fun newInstance(): RemindersListFragment {
-			return RemindersListFragment()
-		}
 	}
 }

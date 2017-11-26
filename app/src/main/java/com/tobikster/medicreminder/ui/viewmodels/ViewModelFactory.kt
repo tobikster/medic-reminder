@@ -1,23 +1,15 @@
-package com.tobikster.medicreminder.ui.reminders.model
+package com.tobikster.medicreminder.ui.viewmodels
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import android.util.ArrayMap
-import com.tobikster.medicreminder.di.ViewModelSubComponent
 import javax.inject.Inject
+import javax.inject.Provider
 import javax.inject.Singleton
-import kotlin.reflect.KFunction
 
 @Singleton
-class ReminderViewModelFactory @Inject constructor(
-		viewModelSubComponent: ViewModelSubComponent
+class ViewModelFactory @Inject constructor(
+		private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
-	private val creators: ArrayMap<Class<*>, KFunction<ViewModel>> = ArrayMap()
-
-	init {
-		creators.put(RemindersListModel::class.java, viewModelSubComponent::remindersListModel)
-		creators.put(ReminderDetailsModel::class.java, viewModelSubComponent::reminderDetailsModel)
-	}
 
 	override fun <T : ViewModel> create(modelClass: Class<T>): T {
 		var creator = creators[modelClass]
@@ -35,7 +27,7 @@ class ReminderViewModelFactory @Inject constructor(
 		}
 		try {
 			@Suppress("UNCHECKED_CAST")
-			return creator.call() as T
+			return creator.get() as T
 		} catch (e: Exception) {
 			throw RuntimeException(e)
 		}
