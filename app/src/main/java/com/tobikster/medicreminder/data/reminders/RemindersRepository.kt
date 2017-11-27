@@ -1,6 +1,7 @@
 package com.tobikster.medicreminder.data.reminders
 
 import android.arch.lifecycle.LiveData
+import io.reactivex.Completable
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -10,12 +11,11 @@ class RemindersRepository @Inject constructor(
 ) : RemindersDataSource {
 	override fun getAllReminders(): LiveData<List<Reminder>> = reminderDao.getAllReminders()
 
-	override fun addReminder(reminder: Reminder): Long {
-		val reminderDao = reminderDao
-		var insertedId = 0L
-		if (reminder.name.isNotEmpty()) {
-			insertedId = reminderDao.addReminder(reminder)
+	override fun addReminder(reminder: Reminder): Completable = Completable.fromAction {
+		if (reminder.name.isEmpty()) {
+			throw IllegalArgumentException("Reminder name cannot be empty!")
+		} else {
+			reminderDao.addReminder(reminder)
 		}
-		return insertedId
 	}
 }

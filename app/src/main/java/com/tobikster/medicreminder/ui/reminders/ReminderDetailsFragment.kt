@@ -12,7 +12,6 @@ import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.tobikster.medicreminder.R
 import com.tobikster.medicreminder.ui.reminders.model.Reminder
 import com.tobikster.medicreminder.ui.reminders.model.ReminderDetailsModel
@@ -50,15 +49,8 @@ class ReminderDetailsFragment : Fragment() {
 
 		time_editor.setIs24HourView(DateFormat.is24HourFormat(context))
 		save_button.setOnClickListener {
-			if (reminderDetailsModel.addReminder(title_editor.text.toString(),
-			                                     time_editor.hour,
-			                                     time_editor.minute)) {
-				if (interactor != null) {
-					interactor!!.onReminderAdded()
-				}
-			} else {
-				Toast.makeText(context, "Cannot add reminder", Toast.LENGTH_SHORT).show()
-			}
+			reminderDetailsModel.addReminder(title_editor.text.toString(), time_editor.hour, time_editor.minute)
+			interactor?.onReminderAdded()
 		}
 	}
 
