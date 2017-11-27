@@ -24,7 +24,7 @@ class ReminderDetailsModel @Inject constructor(
 		var reminderAdded = false
 		if (title.isNotEmpty() && hour >= 0 && hour < 24 && minute >= 0 && minute < 60) {
 			val reminder = com.tobikster.medicreminder.data.reminders.Reminder(0, title, LocalTime.of(hour, minute))
-			reminderAdded = remindersDataSource.addReminder(reminder)
+			reminderAdded = remindersDataSource.addReminder(reminder) > 0
 		}
 		return reminderAdded
 	}

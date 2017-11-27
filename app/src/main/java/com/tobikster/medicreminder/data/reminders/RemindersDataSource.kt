@@ -4,5 +4,5 @@ import android.arch.lifecycle.LiveData
 
 interface RemindersDataSource {
 	fun getAllReminders(): LiveData<List<Reminder>>
-	fun addReminder(reminder: Reminder): Boolean
+	fun addReminder(reminder: Reminder): Long
 }
