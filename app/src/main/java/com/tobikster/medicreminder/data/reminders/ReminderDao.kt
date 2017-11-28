@@ -14,5 +14,5 @@ interface ReminderDao {
 	fun getReminder(id: Long): LiveData<Reminder>
 
 	@Insert
-	fun addReminder(reminder: Reminder): Long
+	fun add(vararg reminder: Reminder): List<Long>
 }

@@ -15,7 +15,7 @@ class RemindersRepository @Inject constructor(
 		if (reminder.name.isEmpty()) {
 			throw IllegalArgumentException("Reminder name cannot be empty!")
 		} else {
-			reminderDao.addReminder(reminder)
+			reminderDao.add(reminder)
 		}
 	}
 }
