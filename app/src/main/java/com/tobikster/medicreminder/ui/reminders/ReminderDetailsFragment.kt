@@ -2,6 +2,7 @@ package com.tobikster.medicreminder.ui.reminders
 
 
 import android.annotation.SuppressLint
+
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -17,7 +18,10 @@ import com.tobikster.medicreminder.R
 import com.tobikster.medicreminder.ui.reminders.model.Reminder
 import com.tobikster.medicreminder.ui.reminders.model.ReminderDetailsModel
 import dagger.android.support.AndroidSupportInjection
+import io.reactivex.CompletableObserver
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_reminder_details.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class ReminderDetailsFragment : Fragment() {
@@ -26,6 +30,10 @@ class ReminderDetailsFragment : Fragment() {
 	private lateinit var reminderDetailsModel: ReminderDetailsModel
 
 	private var interactor: Interactor? = null
+
+	companion object {
+		fun newInstance(): ReminderDetailsFragment = ReminderDetailsFragment()
+	}
 
 	override fun onAttach(context: Context?) {
 		super.onAttach(context)
@@ -42,7 +50,7 @@ class ReminderDetailsFragment : Fragment() {
 		reminderDetailsModel = ViewModelProviders.of(this, viewModelFactory).get(ReminderDetailsModel::class.java)
 	}
 
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =// Inflate the layout for this fragment
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
 			inflater.inflate(R.layout.fragment_reminder_details, container, false)
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,15 +58,21 @@ class ReminderDetailsFragment : Fragment() {
 
 		time_editor.setIs24HourView(DateFormat.is24HourFormat(context))
 		save_button.setOnClickListener {
-			if (reminderDetailsModel.addReminder(title_editor.text.toString(),
-			                                     time_editor.hour,
-			                                     time_editor.minute)) {
-				if (interactor != null) {
-					interactor!!.onReminderAdded()
-				}
-			} else {
-				Toast.makeText(context, "Cannot add reminder", Toast.LENGTH_SHORT).show()
-			}
+			reminderDetailsModel.addReminder(title_editor.text.toString(), time_editor.hour, time_editor.minute).subscribe(
+					object : CompletableObserver {
+						override fun onComplete() {
+							interactor?.onReminderAdded()
+						}
+
+						override fun onSubscribe(d: Disposable) {
+						}
+
+						override fun onError(e: Throwable) {
+							Toast.makeText(context, "Cannot add reminder", Toast.LENGTH_SHORT).show()
+							Timber.e(e, "Reminder cannot be added!")
+						}
+					}
+			)
 		}
 	}
 
@@ -74,12 +88,8 @@ class ReminderDetailsFragment : Fragment() {
 			}
 		})
 	}
-
 	interface Interactor {
 		fun onReminderAdded()
-	}
 
-	companion object {
-		fun newInstance(): ReminderDetailsFragment = ReminderDetailsFragment()
 	}
 }

@@ -27,7 +27,7 @@ class RemindersActivity : AppCompatActivity(), HasSupportFragmentInjector, Remin
 	override fun supportFragmentInjector(): AndroidInjector<Fragment>? = fragmentDispatchingAndroidInjector
 
 	override fun onAddReminderButtonClicked() {
-		val reminderDetailsFragment = ReminderDetailsFragment.newInstance()
+		val reminderDetailsFragment = ReminderDetailsFragment.Companion.newInstance()
 		supportFragmentManager.beginTransaction()
 				.addToBackStack(null)
 				.replace(R.id.content, reminderDetailsFragment)
@@ -35,7 +35,7 @@ class RemindersActivity : AppCompatActivity(), HasSupportFragmentInjector, Remin
 	}
 
 	override fun onReminderAdded() {
-		val remindersListFragment = RemindersListFragment.newInstance()
+		val remindersListFragment = RemindersListFragment.Companion.newInstance()
 		supportFragmentManager.beginTransaction()
 				.addToBackStack(null)
 				.replace(R.id.content, remindersListFragment)
