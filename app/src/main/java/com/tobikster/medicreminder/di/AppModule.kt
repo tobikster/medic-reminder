@@ -20,8 +20,7 @@ internal class AppModule {
 	@Singleton
 	@Provides
 	fun provideDatabase(context: Context): Database =
-			// TODO: Turn off allow main thread queries!
-			Room.databaseBuilder(context, Database::class.java, "medicreminder.db").allowMainThreadQueries().build()
+			Room.databaseBuilder(context, Database::class.java, "medicreminder.db").build()
 
 	@Singleton
 	@Provides
