@@ -14,4 +14,5 @@ ext {
 	rxjava_version = '2.1.7'
 	sonarqube_gradle_plugin_version = '2.6-rc1'
 	timber_version = '4.6.0'
+	threetenabp_version = '1.0.5'
 }

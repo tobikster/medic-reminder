@@ -7,7 +7,7 @@ android {
 	compileSdkVersion 27
 	defaultConfig {
 		applicationId "com.tobikster.medicreminder"
-		minSdkVersion 26
+		minSdkVersion 21
 		targetSdkVersion 27
 		versionCode 1
 		versionName "1.0"
@@ -69,6 +69,8 @@ dependencies {
 	implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
 
 	implementation "com.jakewharton.timber:timber:$timber_version"
+
+	implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
 
 	debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
 	releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"

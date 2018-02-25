@@ -1,7 +1,7 @@
 package com.tobikster.medicreminder.data.reminders
 
 import android.arch.persistence.room.TypeConverter
-import java.time.LocalTime
+import org.threeten.bp.LocalTime
 
 class DateTimeConverter {
 	companion object {

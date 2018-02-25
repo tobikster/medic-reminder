@@ -17,6 +17,7 @@ import com.tobikster.medicreminder.ui.reminders.model.Reminder
 import com.tobikster.medicreminder.ui.reminders.model.RemindersListModel
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_reminders_list.*
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -51,6 +52,8 @@ class RemindersListFragment : Fragment() {
 
 		if (context is Interactor) {
 			interactor = context
+		} else {
+			Timber.d("Interactor not attached, context is not subclass of ${Interactor::class.qualifiedName}")
 		}
 	}
 
@@ -87,6 +90,5 @@ class RemindersListFragment : Fragment() {
 
 	interface Interactor {
 		fun onAddReminderButtonClicked()
-
 	}
 }

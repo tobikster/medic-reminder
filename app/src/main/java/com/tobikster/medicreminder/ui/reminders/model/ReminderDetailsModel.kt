@@ -7,7 +7,7 @@ import com.tobikster.medicreminder.data.reminders.RemindersDataSource
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.time.LocalTime
+import org.threeten.bp.LocalTime
 import javax.inject.Inject
 
 class ReminderDetailsModel @Inject constructor(

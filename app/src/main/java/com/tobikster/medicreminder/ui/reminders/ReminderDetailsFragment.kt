@@ -2,11 +2,11 @@ package com.tobikster.medicreminder.ui.reminders
 
 
 import android.annotation.SuppressLint
-
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.format.DateFormat
@@ -39,6 +39,8 @@ class ReminderDetailsFragment : Fragment() {
 		super.onAttach(context)
 		if (context is Interactor) {
 			interactor = context
+		} else {
+			Timber.d("Interactor not attached, it is not subclass of ${Interactor::class.qualifiedName}")
 		}
 	}
 
@@ -58,7 +60,12 @@ class ReminderDetailsFragment : Fragment() {
 
 		time_editor.setIs24HourView(DateFormat.is24HourFormat(context))
 		save_button.setOnClickListener {
-			reminderDetailsModel.addReminder(title_editor.text.toString(), time_editor.hour, time_editor.minute).subscribe(
+			@Suppress("DEPRECATION")
+			val hour = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) time_editor.hour else time_editor.currentHour
+			@Suppress("DEPRECATION")
+			val minute = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) time_editor.minute else time_editor.currentMinute
+
+			reminderDetailsModel.addReminder(title_editor.text.toString(), hour, minute).subscribe(
 					object : CompletableObserver {
 						override fun onComplete() {
 							interactor?.onReminderAdded()
@@ -83,13 +90,19 @@ class ReminderDetailsFragment : Fragment() {
 			if (it != null) {
 				title_editor.setText(it.title)
 				val reminderTime = it.time
-				time_editor.hour = reminderTime.hour
-				time_editor.minute = reminderTime.minute
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+					time_editor.hour = reminderTime.hour
+					time_editor.minute = reminderTime.minute
+				} else {
+					@Suppress("DEPRECATION")
+					time_editor.currentHour = reminderTime.hour
+					@Suppress("DEPRECATION")
+					time_editor.currentMinute = reminderTime.minute
+				}
 			}
 		})
 	}
 	interface Interactor {
 		fun onReminderAdded()
-
 	}
 }

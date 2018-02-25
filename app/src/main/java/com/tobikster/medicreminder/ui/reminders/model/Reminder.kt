@@ -1,5 +1,6 @@
 package com.tobikster.medicreminder.ui.reminders.model
 
-import java.time.LocalTime
+import org.threeten.bp.LocalTime
+
 
 data class Reminder (val title: String, val time: LocalTime)

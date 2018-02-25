@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.tobikster.medicreminder.R
 import com.tobikster.medicreminder.ui.reminders.model.Reminder
 import kotlinx.android.synthetic.main.reminder_list_item.view.*
-import java.time.format.DateTimeFormatter
+import org.threeten.bp.format.DateTimeFormatter
 
 internal class RemindersAdapter(private val context: Context) : RecyclerView.Adapter<RemindersAdapter.ReminderViewHolder>() {
 
