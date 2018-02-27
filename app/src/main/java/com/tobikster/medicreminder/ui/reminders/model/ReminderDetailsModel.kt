@@ -19,7 +19,7 @@ class ReminderDetailsModel @Inject constructor(
 	fun addReminder(title: String, hour: Int, minute: Int): Completable {
 		val reminder = com.tobikster.medicreminder.data.reminders.Reminder(0, title, LocalTime.of(hour, minute))
 		return remindersDataSource.addReminder(reminder)
-		                          .observeOn(AndroidSchedulers.mainThread())
-		                          .subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribeOn(Schedulers.io())
 	}
 }

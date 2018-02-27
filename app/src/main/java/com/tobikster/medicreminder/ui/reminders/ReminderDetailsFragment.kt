@@ -25,7 +25,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class ReminderDetailsFragment : Fragment() {
-	@Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+	@Inject
+	lateinit var viewModelFactory: ViewModelProvider.Factory
 
 	private lateinit var reminderDetailsModel: ReminderDetailsModel
 
@@ -102,6 +103,7 @@ class ReminderDetailsFragment : Fragment() {
 			}
 		})
 	}
+
 	interface Interactor {
 		fun onReminderAdded()
 	}

@@ -12,7 +12,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class MedicReminderApplication : Application(), HasActivityInjector {
-	@Inject lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+	@Inject
+	lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
 	override fun onCreate() {
 		super.onCreate()

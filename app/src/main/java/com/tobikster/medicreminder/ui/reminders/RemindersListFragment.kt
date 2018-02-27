@@ -37,7 +37,8 @@ class RemindersListFragment : Fragment() {
 		fun newInstance(): RemindersListFragment = RemindersListFragment()
 	}
 
-	@Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+	@Inject
+	lateinit var viewModelFactory: ViewModelProvider.Factory
 
 	private lateinit var remindersListModel: RemindersListModel
 
@@ -83,7 +84,7 @@ class RemindersListFragment : Fragment() {
 	override fun onStart() {
 		super.onStart()
 
-		remindersListModel.remindersList.observe(this, Observer<List<Reminder>>{
+		remindersListModel.remindersList.observe(this, Observer<List<Reminder>> {
 			remindersAdapter.setData(it ?: emptyList())
 		})
 	}

@@ -12,7 +12,8 @@ import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 class RemindersActivity : AppCompatActivity(), HasSupportFragmentInjector, RemindersListFragment.Interactor, ReminderDetailsFragment.Interactor {
-	@Inject lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+	@Inject
+	lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
 	@SuppressLint("CheckResult")
 	override fun onCreate(savedInstanceState: Bundle?) {
