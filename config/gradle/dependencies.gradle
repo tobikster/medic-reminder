@@ -7,6 +7,7 @@ ext {
 	versions['android_gradle_plugin'] = '3.2.0-alpha03'
 	versions['android_support_library'] = '27.1.0'
 	versions['android_testing_library'] = '1.0.1'
+	versions['anko'] = '0.10.4'
 	versions['constraint_layout'] = '1.0.2'
 	versions['dagger'] = '2.13'
 	versions['espresso'] = '3.0.1'
