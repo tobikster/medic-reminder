@@ -12,7 +12,7 @@ ext {
 	versions['dagger'] = '2.13'
 	versions['espresso'] = '3.0.1'
 	versions['junit'] = '4.12'
-	versions['kotlin'] = '1.2.21'
+	versions['kotlin'] = '1.2.30'
 	versions['leakcanary'] = '1.5.4'
 	versions['rxandroid'] = '2.0.1'
 	versions['rxjava'] = '2.1.7'
