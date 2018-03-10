@@ -1,7 +1,9 @@
-apply plugin: "com.android.application"
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
+plugins {
+	id 'com.android.application' version '3.2.0-alpha05'
+	id 'org.jetbrains.kotlin.android' version '1.2.21'
+	id 'org.jetbrains.kotlin.kapt' version '1.2.21'
+	id 'org.jetbrains.kotlin.android.extensions' version '1.2.30'
+}
 
 android {
 	compileSdkVersion 27
