@@ -1,21 +1,20 @@
 ext {
 	versions = new HashMap<String, String>()
 
-	versions['android_architecture_components'] = '1.0.0'
-	versions['android_architecture_components'] = '1.0.0'
-	versions['android_architecture_components_lifecycle'] = '1.1.0'
+	versions['android_architecture_components'] = '1.1.0'
+	versions['android_architecture_components_lifecycle'] = '1.1.1'
 	versions['android_gradle_plugin'] = '3.2.0-alpha03'
-	versions['android_support_library'] = '27.1.0'
+	versions['android_support_library'] = '27.1.1'
 	versions['android_testing_library'] = '1.0.1'
 	versions['anko'] = '0.10.4'
-	versions['constraint_layout'] = '1.0.2'
+	versions['constraint_layout'] = '1.1.0'
 	versions['dagger'] = '2.13'
 	versions['espresso'] = '3.0.1'
 	versions['junit'] = '4.12'
-	versions['kotlin'] = '1.2.30'
+	versions['kotlin'] = '1.2.41'
 	versions['leakcanary'] = '1.5.4'
 	versions['rxandroid'] = '2.0.1'
 	versions['rxjava'] = '2.1.7'
-	versions['timber'] = '4.6.0'
+	versions['timber'] = '4.7.0'
 	versions['threetenabp'] = '1.0.5'
 }
